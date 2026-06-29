@@ -1,5 +1,3 @@
-markdown
-
 # 🐧 Arch Linux Xfce4 Auto Install Script
 
 > Script tự động cài đặt **Xfce4 Desktop** + **LightDM** + **OpenSSH** trên Arch Linux.
