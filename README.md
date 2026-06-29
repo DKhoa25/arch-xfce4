@@ -1,50 +1,76 @@
-🐧 Arch Linux Xfce4 Auto Install Script
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" width="40" height="40"/> Arch Linux Xfce4 Auto Install Script
 
-Script tự động cài đặt Xfce4 Desktop + LightDM + OpenSSH trên Arch Linux.
+    Script tự động cài đặt Xfce4 Desktop + LightDM + OpenSSH trên Arch Linux.
 
 https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white
 https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white
-https://img.shields.io/badge/License-MIT-green.svg
+https://img.shields.io/badge/License-MIT-green?style=for-the-badge
+https://img.shields.io/github/stars/DKhoa25/arch-xfce-installer?style=for-the-badge&color=yellow
+📋 Mục lục
+
+    ✨ Tính năng
+
+    📋 Yêu cầu
+
+    🚀 Cài đặt nhanh
+
+    📖 Tạo script thủ công
+
+    🔧 Cấu hình sau cài đặt
+
+    ❗ Xử lý lỗi thường gặp
+
+    🛠️ Tùy chỉnh script
+
+    ❓ Hỏi đáp
+
+    🤝 Đóng góp
+
+    📄 Giấy phép
+
 ✨ Tính năng
-
-    🚀 Xfce4 - Môi trường desktop nhẹ, nhanh
-
-    🔌 xfce4-goodies - Plugin và công cụ mở rộng
-
-    🖥️ LightDM - Màn hình đăng nhập đồ họa (chỉ Xfce4)
-
-    🔒 OpenSSH - Kết nối từ xa, tự động khởi động
-
-    ⚡ Tự động hóa - Cài đặt với 1 script duy nhất
-
+Tính năng	Mô tả
+🚀 Xfce4	Môi trường desktop nhẹ, nhanh và ổn định
+🔌 xfce4-goodies	Plugin và công cụ mở rộng
+🖥️ LightDM	Màn hình đăng nhập đồ họa (chỉ Xfce4)
+🔒 OpenSSH	Kết nối từ xa, tự động khởi động
+⚡ Tự động hóa	Cài đặt với 1 script duy nhất
+🎨 Tùy chỉnh sẵn	Cấu hình LightDM tối ưu cho Xfce4
 📋 Yêu cầu
 
-    Arch Linux
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/archlinux/archlinux-original.svg" width="16" height="16"/> Arch Linux (hoặc các bản phân phối dựa trên Arch)
 
-    Kết nối Internet
+    🌐 Kết nối Internet (để tải các gói từ kho)
 
-    Quyền sudo
+    🔑 Quyền sudo (hoặc tài khoản root)
+
+    💾 Dung lượng trống: ~2GB
 
 🚀 Cài đặt nhanh
 bash
 
-# Tải và chạy
+# Bước 1: Tải script
 curl -O https://raw.githubusercontent.com/DKhoa25/arch-xfce-installer/main/xfce.sh
+
+# Bước 2: Cấp quyền thực thi
 chmod +x xfce.sh
+
+# Bước 3: Chạy script
 ./xfce.sh
 
-# Khởi động lại
+# Bước 4: Khởi động lại hệ thống
 sudo reboot
 
 📖 Tạo script thủ công
+
+Nếu bạn muốn tự tạo script thay vì tải về:
 bash
 
-nano ~/cai-dat-xfce.sh
-# Dán nội dung script bên dưới
-chmod +x ~/xfce.sh
-./xfce.sh
+# Tạo file script
+nano ~/xfce.sh
 
 Nội dung script:
+<details> <summary><b>📄 Click để xem toàn bộ script</b></summary>
 bash
 
 #!/bin/bash
@@ -116,58 +142,114 @@ echo "3. Kiem tra SSH: sudo systemctl status sshd"
 echo "4. Ket noi SSH: ssh user@ip-address"
 echo ""
 
+</details>
+bash
+
+# Cấp quyền thực thi và chạy
+chmod +x ~/xfce.sh
+./xfce.sh
+
 🔧 Cấu hình sau cài đặt
 Công việc	Lệnh
-Kiểm tra LightDM	sudo systemctl status lightdm
-Kiểm tra SSH	sudo systemctl status sshd
-Tùy chỉnh LightDM	sudo nano /etc/lightdm/lightdm.conf
-Đổi mật khẩu	passwd
+🔍 Kiểm tra LightDM	sudo systemctl status lightdm
+🔍 Kiểm tra SSH	sudo systemctl status sshd
+⚙️ Tùy chỉnh LightDM	sudo nano /etc/lightdm/lightdm.conf
+🔑 Đổi mật khẩu	passwd
+🌐 Kiểm tra IP	ip addr hoặc hostname -I
 ❗ Xử lý lỗi thường gặp
-Lỗi	Giải pháp
+🚨 Lỗi	💡 Giải pháp
 LightDM không khởi động	sudo systemctl start lightdm
 Màn hình đen	Cài driver đồ họa: sudo pacman -S mesa
 SSH không kết nối	Kiểm tra firewall: sudo systemctl stop firewalld
 Lỗi pacman	Kiểm tra Internet: ping google.com
+Không có quyền sudo	Chạy với tài khoản root: su -
 🛠️ Tùy chỉnh script
-Thêm gói phần mềm
+📦 Thêm gói phần mềm
 bash
 
 sudo pacman -S xfce4 xfce4-goodies firefox vlc --noconfirm
 
-Đổi sang SDDM
+🔄 Đổi sang SDDM
 bash
 
 sudo pacman -S sddm --noconfirm
 sudo systemctl enable sddm
 sudo systemctl disable lightdm
 
-Tự động đăng nhập
+🔐 Tự động đăng nhập
 bash
 
 # Mở file cấu hình
 sudo nano /etc/lightdm/lightdm.conf
 
-# Thêm dòng:
+# Thêm dòng dưới [Seat:*]
 autologin-user=username
+autologin-session=xfce
+
+🎨 Đổi hình nền đăng nhập
+bash
+
+# Chỉnh sửa file cấu hình greeter
+sudo nano /etc/lightdm/lightdm-gtk-greeter.conf
+
+# Thay đổi dòng background
+background=/path/to/your/image.jpg
 
 ❓ Hỏi đáp
+<details> <summary><b>Script có chạy trên Manjaro/EndeavourOS không?</b></summary>
 
-Hỏi: Script có chạy trên Manjaro/EndeavourOS không?
-Đáp: Có, nhưng có thể cần điều chỉnh nhẹ.
+Có, nhưng có thể cần điều chỉnh nhẹ vì một số bản phân phối sử dụng kho riêng.
+</details><details> <summary><b>Tại sao LightDM chỉ hiển thị Xfce4?</b></summary>
 
-Hỏi: Sao LightDM chỉ hiển thị Xfce4?
-Đáp: Script được thiết kế chỉ hiển thị Xfce4 để đơn giản hóa.
+Script được thiết kế chỉ hiển thị Xfce4 để đơn giản hóa và tránh nhầm lẫn cho người dùng mới.
+</details><details> <summary><b>Làm sao để gỡ bỏ hoàn toàn?</b></summary>
+bash
 
-Hỏi: Làm sao để gỡ bỏ?
-Đáp: sudo pacman -Rns xfce4 xfce4-goodies lightdm openssh
+sudo pacman -Rns xfce4 xfce4-goodies lightdm openssh
+sudo systemctl disable lightdm sshd
+
+</details><details> <summary><b>Có cần cài driver đồ họa riêng không?</b></summary>
+
+Script cài Xorg cơ bản. Nếu dùng NVIDIA/AMD, cần cài driver riêng sau:
+
+    NVIDIA: sudo pacman -S nvidia
+
+    AMD: sudo pacman -S mesa xf86-video-amdgpu
+
+</details>
 🤝 Đóng góp
 
-Mọi đóng góp đều được hoan nghênh! Fork, tạo branch và gửi Pull Request.
+Mọi đóng góp đều được hoan nghênh!
+
+    Fork repository
+
+    Tạo branch mới (git checkout -b feature/AmazingFeature)
+
+    Commit thay đổi (git commit -m 'Add some AmazingFeature')
+
+    Push lên branch (git push origin feature/AmazingFeature)
+
+    Mở Pull Request
+
 📄 Giấy phép
 
-MIT License - Xem file LICENSE để biết chi tiết.
+Phân phối dưới giấy phép MIT License. Xem file LICENSE để biết thêm chi tiết.
+🌟 Ủng hộ
 
-Tác giả: [Tên của bạn]
-GitHub: [Link GitHub của bạn]
+Nếu bạn thấy dự án này hữu ích, hãy:
+
+    ⭐ Star repository
+
+    🍴 Fork và chia sẻ
+
+    🐛 Báo lỗi hoặc gợi ý tính năng mới
+
+👨‍💻 Tác giả: Khoa Phan
+🐙 GitHub: DKhoa25
+📧 Email: ddkhoa14086@gmail.com
+<div align="center">
 
 Made with ❤️ for Arch Linux community
+
+⬆ Quay lại đầu trang
+</div>
